@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Industria4.Pages.HomePage"
+             Title="HOME"
+             xmlns:animations="clr-namespace:Industria4.Animations;assembly=Industria4"
+             xmlns:ctrl="clr-namespace:Industria4.Views;assembly=Industria4"
+             xmlns:controls="clr-namespace:Industria4.Controls;assembly=Industria4"
+             xmlns:converters="clr-namespace:Industria4.Converters;assembly=Industria4"
+             xmlns:triggers="clr-namespace:Industria4.Triggers;assembly=Industria4"
+             xmlns:behaviors="clr-namespace:Industria4.Behaviors;assembly=Industria4"
+             xmlns:eff="clr-namespace:Industria4.Effects;assembly=Industria4"
+             xmlns:i18n="clr-namespace:Industria4.Helpers"
+             xmlns:helpers="clr-namespace:Industria4.Helpers;assembly=Industria4">
+
+  <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+            <converters:WebNavigatingEventArgsConverter x:Key="WebNavigatingEventArgsConverter" /> 
+            <converters:WebNavigatedEventArgsConverter x:Key="WebNavigatedEventArgsConverter" /> 
+            </ResourceDictionary>
+    </ContentPage.Resources>
+            
+            
+    <ContentPage.Content>
+
+      
+
+      <Grid >            
+        <Grid >
+
+                
+          <StackLayout Orientation="Horizontal"  >
+                    
+     <StackLayout Padding="14,12,9,11" >
+        <Label Text="{i18n:Translate Chat}" FontSize="20"  TextColor="Black" FontAttributes="Bold" Margin="15,0,0,0" /> 
+        <ListView BackgroundColor="{StaticResource VeryLightGreyColor}"
+            HasUnevenRows="true" SeparatorVisibility="None" 
+            ItemsSource="{Binding Messages}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell  >
+                        <StackLayout  >
+                            <Frame  CornerRadius="10"  Margin="5" HeightRequest="30"  BackgroundColor="{Binding ., Converter={StaticResource ChatColorConverter}}" >
+                                <StackLayout  VerticalOptions="Center" Orientation="Horizontal" HorizontalOptions="{Binding ., Converter={StaticResource ChatToRightConverter}}" >
+                                    <Label Text="{Binding Nome}" />
+                                    <Label Text="{Binding Msg}" />
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>              
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+    <StackLayout HorizontalOptions="FillAndExpand" Margin="9,12,12,11" BackgroundColor="{StaticResource LightGreyColor}">    
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource BlueColor}" >
+              <StackLayout HorizontalOptions="FillAndExpand" Margin="10,15,10,5" Padding="0,0,1,0"  >
+                <Label Text="{i18n:Translate UTILIZADORES}" FontSize="{StaticResource LargeSize}" TextColor="{StaticResource WhiteColor}" HorizontalTextAlignment="Center" />
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding TabUsers}"
+                        NumberOfTapsRequired="1" />
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+             <StackLayout HorizontalOptions="FillAndExpand" Margin="10,15,10,5" Padding="1,0,0,0" >
+                <Label HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" FontSize="{StaticResource LargeSize}" TextColor="{StaticResource WhiteColor}" Text="{i18n:Translate GRUPOS}"/>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding TabGroups}"
+                        NumberOfTapsRequired="1" />
+                </StackLayout.GestureRecognizers>
+            </StackLayout>        
+        </StackLayout>   
+                
+        <StackLayout BackgroundColor="{StaticResource LightGreyColor}" IsVisible="{Binding IsFriendsVisible}" >
+                <ListView ItemsSource="{Binding Friends}" SelectedItem="{Binding SelectedFriend}" SeparatorVisibility="Default" SeparatorColor="{StaticResource VeryLightGreyColor}">
+                        <ListView.ItemTemplate>
+                        <DataTemplate >
+                            <ViewCell>
+                                <StackLayout HorizontalOptions="Center" Orientation="Horizontal" >
+                                    <Label Text="{Binding Nome}" VerticalTextAlignment="Center" FontSize="{StaticResource MidMediumSize}"  TextColor="Black"/>        
+                                   <Switch IsEnabled="false" IsToggled="{Binding Isconnected}"/>
+                                </StackLayout> 
+                             </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView> 
+                    <StackLayout  BackgroundColor="{StaticResource VeryLightGreyColor}"> 
+                        <Entry
+                            Margin="32,0,32,2"
+                            Placeholder="{i18n:Translate MsgToSend}"
+                            Text="{Binding NewText}" />
+                        <Button 
+                            Margin="30,2,30,10"
+                            Grid.Column="1"
+                            Text="{i18n:Translate MsgToUser}"
+                            Command="{Binding SendMessageCommandToUser}"
+                            CommandParameter="{Binding NewText}"  BackgroundColor="{StaticResource BlueColor}" />
+                </StackLayout> 
+             </StackLayout> 
+           <StackLayout BackgroundColor="{StaticResource LightGreyColor}" IsVisible="{Binding IsGroupVisible}">
+                <ListView ItemsSource="{Binding Groups}"  SelectedItem="{Binding SelectedGroup}" SeparatorVisibility="Default" SeparatorColor="{StaticResource VeryLightGreyColor}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                               <StackLayout HorizontalOptions="Center"  >
+                                    <Label Text="{Binding RoomName}" VerticalTextAlignment="Center" FontSize="{StaticResource MidMediumSize}"  TextColor="Black"/>        
+                                </StackLayout>     
+                             </ViewCell> 
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView> 
+               <StackLayout BackgroundColor="{StaticResource VeryLightGreyColor}">     
+                    <Entry
+                        Margin="32,0,32,2"
+                        Placeholder="{i18n:Translate MsgToSend}"
+                        Text="{Binding NewText}" />
+                    <Button
+                        Margin="30,2,30,10"
+                        Grid.Column="1"
+                        Text="{i18n:Translate MsgToSendGroup}"
+                        Command="{Binding SendMessageCommandToGroups}"
+                        CommandParameter="{Binding NewText}" BackgroundColor="{StaticResource BlueColor}"/>
+                </StackLayout> 
+            </StackLayout> 
+        </StackLayout>   
+                    
+         </StackLayout>   
+                
+          <AbsoluteLayout
+                Grid.Column="0"
+                Grid.Row="0" 
+                IsVisible="{Binding IsBusy}" >
+                <WebView     
+                    AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                    AbsoluteLayout.LayoutFlags="All">
+                    <WebView.Behaviors>
+                        <behaviors:EventToCommandBehavior 
+                            EventName="Navigating"
+                            EventArgsConverter="{StaticResource WebNavigatingEventArgsConverter}"
+                            Command="{Binding NavigateCommand}" />
+                    </WebView.Behaviors>
+                </WebView>
+            </AbsoluteLayout>
+
+                
+        </Grid>
+
+        <!-- INDICATOR    -->
+        <ActivityIndicator 
+          Color="{StaticResource BlueColor}"
+          IsRunning="{Binding IsBusy}"
+          IsVisible="{Binding IsBusy}"
+          VerticalOptions="Center"
+          HorizontalOptions="Center">
+            <ActivityIndicator.WidthRequest>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="iOS, Android" Value="100" />
+                    <On Platform="UWP, WinRT, WinPhone" Value="400" />
+                </OnPlatform>
+            </ActivityIndicator.WidthRequest>
+        </ActivityIndicator>
+             
+    </Grid>
+
+       
+    </ContentPage.Content>
+</ContentPage>

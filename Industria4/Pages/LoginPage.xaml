@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Industria4.Pages.LoginPage"
+             xmlns:i18n="clr-namespace:Industria4.Helpers"
+             xmlns:animations="clr-namespace:Industria4.Animations;assembly=Industria4"
+              xmlns:converters="clr-namespace:Industria4.Converters;assembly=Industria4"
+              xmlns:triggers="clr-namespace:Industria4.Triggers;assembly=Industria4"
+              xmlns:behaviors="clr-namespace:Industria4.Behaviors;assembly=Industria4">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+            <converters:WebNavigatingEventArgsConverter x:Key="WebNavigatingEventArgsConverter" /> 
+            <converters:WebNavigatedEventArgsConverter x:Key="WebNavigatedEventArgsConverter" /> 
+            
+            <Style x:Key="TitleLabelStyle"
+                TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource MontserratRegular}" />
+                <Setter Property="FontAttributes"
+                    Value="Bold" />
+                <Setter Property="FontSize"
+                    Value="{StaticResource BigSize}" />
+                <Setter Property="HorizontalOptions"
+                    Value="Center" />
+                <Setter Property="TextColor"
+                    Value="{StaticResource BlueColor}" />
+                <Setter Property="Margin"
+                    Value="0, 20" />
+            </Style>
+
+            <Style x:Key="HeaderLabelStyle"
+                TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource MontserratRegular}" />
+                <Setter Property="FontSize"
+                    Value="{StaticResource LargerSize}" />
+                <Setter Property="VerticalTextAlignment"
+                    Value="Center" />
+                <Setter Property="TextColor"
+                    Value="{StaticResource BlueColor}" />
+                <Setter Property="HorizontalOptions"
+                    Value="Start" />
+            </Style>
+
+            <Style x:Key="LoginButtonStyle"
+                TargetType="{x:Type Label}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource MontserratRegular}" />
+                <Setter Property="TextColor"
+                    Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize"
+                    Value="{StaticResource LargerSize}" />
+                <Setter Property="HorizontalOptions"
+                    Value="CenterAndExpand" />
+                <Setter Property="FontAttributes"
+                    Value="Bold" />
+                <Setter Property="VerticalOptions"
+                    Value="CenterAndExpand" />
+            </Style>
+
+            <Style x:Key="LoginPanelStyle"
+                TargetType="{x:Type Grid}">
+                <Setter Property="HeightRequest"
+                    Value="20" />
+             <Setter Property="BackgroundColor"
+                    Value="{StaticResource BlueColor}" /> 
+                <Setter Property="HorizontalOptions"
+                    Value="FillAndExpand" />
+                <Setter Property="VerticalOptions"
+                    Value="FillAndExpand" />
+            </Style>
+            
+            <animations:StoryBoard
+              x:Key="LoginAnimation"
+              Target="{x:Reference LoginPanel}">
+                <animations:FadeInAnimation
+                    Direction="Up"
+                    Duration="3500" />
+            </animations:StoryBoard>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Triggers>
+        <EventTrigger
+            Event="Appearing">
+            <triggers:BeginAnimation
+                Animation="{StaticResource LoginAnimation}" />
+        </EventTrigger>
+    </ContentPage.Triggers>
+
+    <ContentPage.Content>
+    
+    <Grid
+      BackgroundColor="{StaticResource WhiteColor}">
+        <Grid
+            x:Name="LoginPanel"
+            Padding="0"
+            ColumnSpacing="0"
+            RowSpacing="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*" />
+                <RowDefinition Height="65*" />
+                <RowDefinition Height="70" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25*" />
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="25*" />
+            </Grid.ColumnDefinitions>
+             
+            <Label
+              Grid.Row="0"
+              Grid.Column="1"
+              Text="INDUSTRIA 4.0"
+              Style="{StaticResource TitleLabelStyle}"/>
+            <!-- LOGIN FORM -->
+            <StackLayout 
+                Grid.Row="1" 
+                Grid.Column="1"
+                Margin="20" VerticalOptions="FillAndExpand" >
+                 <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                          Text="{i18n:Translate Email/Nome Utilizador}"
+                          Style="{StaticResource HeaderLabelStyle}" />
+                        <Entry Text="{Binding UserName.Value, Mode=TwoWay}" AutomationId="username"
+                               Style="{StaticResource EntryStyle}" >
+                         <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding ValidateUserNameCommand}" />
+                        </Entry.Behaviors>
+                            <Entry.Triggers>
+                                <DataTrigger TargetType="Entry"
+                                    Binding="{Binding UserName.IsValid}"
+                                    Value="False">
+                                    <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                </DataTrigger>
+                            </Entry.Triggers>
+                        </Entry>
+
+                          
+                    </StackLayout>
+                    <Label 
+                        Text="{Binding UserName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                       Style="{StaticResource ValidationErrorLabelStyle}" /> 
+                <StackLayout Orientation="Horizontal">
+                    <Label
+                      Text="Password : "
+                      Style="{StaticResource HeaderLabelStyle}" />
+                    <Entry
+                      IsPassword="True"
+                      Text="{Binding Password.Value, Mode=TwoWay}" Style="{StaticResource EntryStyle}" >
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding ValidatePasswordCommand}" />
+                        </Entry.Behaviors>
+                        <Entry.Triggers>
+                            <DataTrigger 
+                                TargetType="Entry"
+                                Binding="{Binding Password.IsValid}"
+                                Value="False">
+                                <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                            </DataTrigger>
+                        </Entry.Triggers>
+                    </Entry>
+                   
+                 </StackLayout>
+                    <Label 
+                        Text="{Binding Password.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                       Style="{StaticResource ValidationErrorLabelStyle}" />
+                 </StackLayout>
+         </StackLayout>
+           
+             <StackLayout 
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Style="{StaticResource LoginPanelStyle}">
+                <Label
+                  Text="{i18n:Translate AUTENTICAR}"
+                  Style="{StaticResource LoginButtonStyle}"/>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding SignInCommand}"
+                        NumberOfTapsRequired="1" />
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+
+            <!-- WEBVIEW -->
+            <AbsoluteLayout
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Grid.Row="0"
+                Grid.RowSpan="3"
+                IsVisible="{Binding IsLogin}">
+                <WebView     
+                    Source="{Binding LoginUrl}"
+                    AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                    AbsoluteLayout.LayoutFlags="All">
+                    <WebView.Behaviors>
+                        <behaviors:EventToCommandBehavior 
+                            EventName="Navigating"
+                            EventArgsConverter="{StaticResource WebNavigatingEventArgsConverter}"
+                            Command="{Binding NavigateCommand}" />
+                    </WebView.Behaviors>
+                </WebView>
+            </AbsoluteLayout>
+        </Grid>
+
+         <!-- INDICATOR -->
+        <ActivityIndicator      
+          Color="{StaticResource BlueColor}"
+          IsRunning="{Binding IsBusy}"
+          IsVisible="{Binding IsBusy}"
+          VerticalOptions="Center"
+          HorizontalOptions="Center">
+            <ActivityIndicator.WidthRequest>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="iOS, Android" Value="100" />
+                    <On Platform="UWP, WinRT, WinPhone" Value="400" />
+                </OnPlatform>
+            </ActivityIndicator.WidthRequest>
+        </ActivityIndicator>
+        
+     </Grid>
+    </ContentPage.Content>
+</ContentPage>

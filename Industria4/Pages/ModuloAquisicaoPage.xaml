@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Industria4.Pages.ModuloAquisicaoPage"
+             Title="{i18n:Translate MODULOAQUISICAO }"
+             xmlns:i18n="clr-namespace:Industria4.Helpers"
+              xmlns:animations="clr-namespace:Industria4.Animations;assembly=Industria4"
+             xmlns:converters="clr-namespace:Industria4.Converters;assembly=Industria4"
+             xmlns:triggers="clr-namespace:Industria4.Triggers;assembly=Industria4"
+             xmlns:behaviors="clr-namespace:Industria4.Behaviors;assembly=Industria4">
+   <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+            
+              <Style x:Key="HeaderItemHeaderLabelStyle"
+               TargetType="{x:Type Label}">
+            <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource BigSize}" /> 
+            <Setter Property="FontAttributes"
+                    Value="Bold" /> 
+        </Style>
+        
+        <Style x:Key="HeaderItemLabelStyle"
+               TargetType="{x:Type Label}">
+            <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource BigSize}" />  
+        </Style>
+            
+           <Style x:Key="ItemHeaderLabelStyle"
+                TargetType="{x:Type Label}">
+             <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="HorizontalOptions"
+                    Value="Start" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource BlueColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource LargeSize}" /> 
+            <Setter Property="FontAttributes"
+                    Value="Bold" />         
+        </Style>   
+
+              <Style x:Key="ItemLabelStyle" 
+               TargetType="{x:Type Label}">
+              <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="HorizontalOptions"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource BlackColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource LargeSize}" />       
+        </Style>
+
+            <Style x:Key="EntryStyle"
+                   TargetType="{x:Type Entry}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource MontserratRegular}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="PlaceholderColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource LargeSize}" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="BackgroundColor" 
+                        Value="Transparent" />
+                <Setter Property="Opacity"
+                        Value="0.6" />
+            </Style>
+      
+            </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+  <ContentPage.Content>    
+        
+   <StackLayout Orientation="Horizontal">
+          <Grid Margin="2"  HorizontalOptions="FillAndExpand" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*" />
+                    <ColumnDefinition Width="70*" />
+                </Grid.ColumnDefinitions>
+                
+                <StackLayout  Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="{Binding NewModulo, Converter={StaticResource EditOrAddExpandeTwoConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource LightGreyColor}" Margin="1" Padding="5" >
+                
+                        <Label Text="{i18n:Translate CodigoModulo }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                        <Entry Text="{Binding CodigoModuloAquisicao.Value}" Style="{StaticResource EntryStyle}">
+                            <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding ValidateCodigoModuloAquisicaoCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                        Binding="{Binding CodigoModuloAquisicao.IsValid}"
+                                        Value="False">
+                                        <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                         <Label Text="{Binding CodigoModuloAquisicao.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                    
+                        <Label Text="{i18n:Translate NomeModulo }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                        <Entry Text="{Binding NomeModuloAquisicao.Value}" Style="{StaticResource EntryStyle}">
+                          <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding ValidateNomeModuloAquisicaoCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                        Binding="{Binding NomeModuloAquisicao.IsValid}"
+                                        Value="False">
+                                        <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                         <Label Text="{Binding NomeModuloAquisicao.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           Style="{StaticResource ValidationErrorLabelStyle}" />
+                    
+                        <Label Text="{i18n:Translate MaquinaModulo }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                        <Picker SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding Maquinas}" ItemDisplayBinding="{Binding NomeMaquina }"/>
+
+                        <Label Text="{i18n:Translate CreatedAt }" IsVisible="{Binding EditModulo}" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                         <Entry Text="{Binding CreatedAt}" IsVisible="{Binding EditModulo}" Style="{StaticResource EntryStyle}"/>
+
+                    
+                        <Label Text="{i18n:Translate ISENABLE } " Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                        <Switch IsToggled="{Binding Active}" />
+               
+                    <Button  Command="{Binding GuardarModulo}" BackgroundColor="{StaticResource BlueColor}" HorizontalOptions="FillAndExpand"  Text="{i18n:Translate GuardarModulo }"/>                
+                </StackLayout>
+
+                    <StackLayout  Grid.Row="0" Grid.Column="1" IsVisible="{Binding EditModulo}" VerticalOptions="Fill" HorizontalOptions="Center" BackgroundColor="#e1e1e1" Padding="5" Margin="1" >        
+                            <StackLayout >
+                                   <Label Text="{i18n:Translate LISTADESENSORES}" FontSize="20"  TextColor="Black" FontAttributes="Bold" Margin="0,10,0,0"/> 
+                            </StackLayout>
+                                <ListView SeparatorVisibility="None" ItemsSource="{Binding Sensores}" behaviors:ItemTappedCommandListView.ItemTappedCommand="{Binding GetSensorDetailsCommand}" HasUnevenRows="True" Margin="5">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        
+                       <Grid Margin="2"  HorizontalOptions="FillAndExpand"  BackgroundColor="{StaticResource BlueColor}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="180"/>
+                            </Grid.RowDefinitions>
+
+                                <StackLayout Grid.Row="0" Margin="5,0,0,0" Orientation="Horizontal" HorizontalOptions="Start" >
+                                    <Label Text="Nome Sensor : " Style="{StaticResource HeaderItemHeaderLabelStyle}"/>
+                                    <Label Text="{Binding NomeSensor}" Style="{StaticResource HeaderItemLabelStyle}" />
+                                </StackLayout>
+
+                        <Grid Grid.Row="1" Margin="1"  HorizontalOptions="FillAndExpand"  BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="70"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="18*" />
+                                <ColumnDefinition Width="18*" />
+                                <ColumnDefinition Width="18*" />
+                                <ColumnDefinition Width="18*" />
+                                <ColumnDefinition Width="18*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            
+                               <StackLayout Grid.Row="0"  Grid.Column="1"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  >
+                                    <Label Text="Codigo do Sensor : " Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                                    <Label Text="{Binding CodigoSensor}" Style="{StaticResource ItemLabelStyle}"/>
+                                </StackLayout>
+                                                
+                                <StackLayout Grid.Row="0" Grid.Column="2"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                                    <Label Text="Id Modulo de Aquisicao : " Style="{StaticResource ItemHeaderLabelStyle}"/>
+                                    <Label Text="{Binding IdModuloAquisicao}" Style="{StaticResource ItemLabelStyle}"/>
+                                </StackLayout>
+                                                
+                                <StackLayout Grid.Row="0" Grid.Column="3"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                                    <Label Text="Valor Maximo : " Style="{StaticResource ItemHeaderLabelStyle}"/>
+                                    <Label Text="{Binding ValorMax}" Style="{StaticResource ItemLabelStyle}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Row="0" Grid.Column="4"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                                    <Label Text="Valor Minimo : " Style="{StaticResource ItemHeaderLabelStyle}"/>
+                                    <Label Text="{Binding ValorMin}" Style="{StaticResource ItemLabelStyle}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Row="0" Grid.Column="5"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                                    <Label Text="Observações : " Style="{StaticResource ItemHeaderLabelStyle}"/>
+                                    <Label Text="{Binding Observacoes}" Style="{StaticResource ItemLabelStyle}"/>
+                                </StackLayout>
+
+                                 <StackLayout Grid.Row="1" Grid.Column="1"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                                    <Label Text="Created At : " Style="{StaticResource ItemHeaderLabelStyle}"/>
+                                    <Label Text="{Binding CreatedAt}" Style="{StaticResource ItemLabelStyle}"/>
+                                </StackLayout>     
+                                                
+                                <StackLayout Grid.Row="1" Grid.Column="2"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                                    <Label Text="Tempo : " Style="{StaticResource ItemHeaderLabelStyle}"/>
+                                    <Label Text="{Binding Tempo}" Style="{StaticResource ItemLabelStyle}"/>
+                                </StackLayout>               
+
+                                <StackLayout Grid.Row="1" Grid.Column="3"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                                    <Label Text="Fator : " Style="{StaticResource ItemHeaderLabelStyle}"/>
+                                    <Label Text="{Binding Fator}" Style="{StaticResource ItemLabelStyle}"/>
+                                </StackLayout>  
+
+                                <StackLayout Grid.Row="1" Grid.Column="4"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                                    <Label Text="Nporta : " Style="{StaticResource ItemHeaderLabelStyle}"/>
+                                    <Label Text="{Binding Nporta}" Style="{StaticResource ItemLabelStyle}"/>
+                                </StackLayout>
+
+                               <StackLayout Grid.Row="1" Grid.Column="5"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                                    <Label Text="IdTipoPorta : " Style="{StaticResource ItemHeaderLabelStyle}"/>
+                                    <Label Text="{Binding IdTipoPorta}" Style="{StaticResource ItemLabelStyle}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Row="2" Grid.Column="2"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                                    <Label Text="Code : " Style="{StaticResource ItemHeaderLabelStyle}"/>
+                                    <Label Text="{Binding Code}" Style="{StaticResource ItemLabelStyle}"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Row="2" Grid.Column="3"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                                    <Label Text="IdGrandeza : " Style="{StaticResource ItemHeaderLabelStyle}"/>
+                                    <Label Text="{Binding IdGrandeza}" Style="{StaticResource ItemLabelStyle}"/>
+                                </StackLayout>
+                                                
+                                <StackLayout Grid.Row="2" Grid.Column="4" Margin="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                                    <Label Text="Activo : " Style="{StaticResource ItemHeaderLabelStyle}"/>
+                                     <Switch x:Name="MySwitch" IsEnabled="false" IsToggled="{Binding  Active }"/>
+                                </StackLayout>
+                            
+                              </Grid>   
+                        </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+                    
+     </StackLayout>
+      </Grid>
+      </StackLayout>  
+        </ContentPage.Content>
+</ContentPage>

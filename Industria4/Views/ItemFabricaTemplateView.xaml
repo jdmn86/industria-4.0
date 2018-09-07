@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Industria4.Views.ItemFabricaTemplateView"
+             xmlns:i18n="clr-namespace:Industria4.Helpers">
+    <ContentView.Resources>
+        <ResourceDictionary>
+        <Style x:Key="HeaderItemHeaderLabelStyle"
+               TargetType="{x:Type Label}">
+            <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource BigSize}" /> 
+            <Setter Property="FontAttributes"
+                    Value="Bold" /> 
+        </Style>
+        
+        <Style x:Key="HeaderItemLabelStyle"
+               TargetType="{x:Type Label}">
+            <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource BigSize}" />  
+        </Style>
+
+         <Style x:Key="ItemHeaderLabelStyle"
+                TargetType="{x:Type Label}">
+             <Setter Property="VerticalTextAlignment"
+                    Value="Start" />   
+            <Setter Property="HorizontalOptions"
+                    Value="Start" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource BlueColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource LargeSize}" /> 
+            <Setter Property="FontAttributes"
+                    Value="Bold" />         
+        </Style>   
+        
+        <Style x:Key="ItemLabelStyle" 
+               TargetType="{x:Type Label}">
+              <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="HorizontalOptions"
+                    Value="End" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource BlackColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource LargeSize}" />       
+        </Style>
+      </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+
+         <Grid Margin="2"  HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource BlueColor}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="27"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+
+                    <StackLayout Grid.Row="0" Margin="5,0,0,0" Orientation="Horizontal" HorizontalOptions="Start" >
+                        <Label Text="{i18n:Translate Nome}" Style="{StaticResource HeaderItemHeaderLabelStyle}"/>
+                        <Label Text="{Binding NomeFabrica}" Style="{StaticResource HeaderItemLabelStyle}" />
+                    </StackLayout>
+
+            <Grid Grid.Row="1" Margin="1"  HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource WhiteColor}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="33*" />
+                    <ColumnDefinition Width="33*" />
+                    <ColumnDefinition Width="33*" />
+                </Grid.ColumnDefinitions>
+                
+                   <StackLayout Grid.Row="0"  Grid.Column="0"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"  >
+                        <Label Text="{i18n:Translate Code }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                        <Label Text="{Binding CodigoFabrica}" Style="{StaticResource ItemLabelStyle}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="0" Grid.Column="1"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                        <Label Text="{i18n:Translate Localizacao }" Style="{StaticResource ItemHeaderLabelStyle}"/>
+                        <Label Text="{Binding Localizacao}" Style="{StaticResource ItemLabelStyle}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="0" Grid.Column="2"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                        <Label Text="{i18n:Translate Telefone }" Style="{StaticResource ItemHeaderLabelStyle}"/>
+                        <Label Text="{Binding Telefone}" Style="{StaticResource ItemLabelStyle}"/>
+                    </StackLayout>
+            
+                    <StackLayout Grid.Row="1" Grid.Column="0" Margin="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                        <Label Text="Ip Gateway" Style="{StaticResource ItemHeaderLabelStyle}"/>
+                        <Label Text="{Binding IpGateway}" Style="{StaticResource ItemLabelStyle}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="1" Grid.Column="1" Margin="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                        <Label Text="{i18n:Translate CodigoGateway }" Style="{StaticResource ItemHeaderLabelStyle}"/>
+                        <Label Text="{Binding CodigoGateway}" Style="{StaticResource ItemLabelStyle}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="1" Grid.Column="2" Margin="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" >
+                        <Label Text="{i18n:Translate ISENABLE }" Style="{StaticResource ItemHeaderLabelStyle}"/>
+                        <Switch IsEnabled="false" IsToggled="{Binding Active}" HorizontalOptions="End" />
+                    </StackLayout>
+                
+                  </Grid>   
+            </Grid>
+        
+    </ContentView.Content>
+</ContentView>

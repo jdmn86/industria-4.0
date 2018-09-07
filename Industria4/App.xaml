@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Industria4.App"
+             xmlns:animations="clr-namespace:Industria4.Animations;assembly=Industria4"
+             xmlns:converters="clr-namespace:Industria4.Converters;assembly=Industria4"
+             xmlns:triggers="clr-namespace:Industria4.Triggers;assembly=Industria4"
+             xmlns:behaviors="clr-namespace:Industria4.Behaviors;assembly=Industria4">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="WhiteColor">#ffffff</Color>
+            <Color x:Key="BlackColor">#000000</Color>
+            <Color x:Key="LightGreyColor">#DDDDDD</Color>
+            <Color x:Key="VeryLightGreyColor">#eeeeee</Color>
+            <Color x:Key="VeryLightBlueColor">#B4D4ED</Color>
+            <Color x:Key="BlueColor">#0373CF</Color>
+            <Color x:Key="LightBlueColor">#3D9BED</Color>
+            <Color x:Key="DarkGreenColor">#00857D</Color>
+            <Color x:Key="GrayColor">#e2e2e2</Color>
+            <Color x:Key="ErrorColor">#ff5252</Color>
+            <Color x:Key="TextColor">#757575</Color>
+            <Color x:Key="InverseTextColor">#FFFFFF</Color>
+            <Color x:Key="LightTextColor">#979797</Color>
+
+               <!-- FONTS -->
+            <OnPlatform x:Key="MontserratRegular"
+                        x:TypeArguments="x:String">
+                <On Platform="iOS" Value="Montserrat-Regular" />
+                <On Platform="Android" Value="Montserrat-Regular.ttf#Montserrat" />
+                <On Platform="UWP, WinRT, WinPhone" Value="Assets/Fonts/Montserrat-Regular.ttf#Montserrat" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="MontserratBold"
+                        x:TypeArguments="x:String">
+                <On Platform="iOS" Value="Montserrat-Bold" />
+                <On Platform="Android" Value="Montserrat-Bold.ttf#Montserrat" />
+                <On Platform="UWP, WinRT, WinPhone" Value="Assets/Fonts/Montserrat-Bold.ttf#Montserrat" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="SourceSansProRegular"
+                        x:TypeArguments="x:String">
+                <On Platform="iOS" Value="SourceSansPro-Regular" />
+                <On Platform="Android" Value="SourceSansPro-Regular.ttf#Source Sans Pro" />
+                <On Platform="UWP, WinRT, WinPhone" Value="Assets/Fonts/SourceSansPro-Regular.ttf#Source Sans Pro" />
+            </OnPlatform>
+
+                 <OnPlatform x:Key="LittleSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="10" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="11" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="MidMediumSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="12" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="14" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="MediumSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="14" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="16" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="LargeSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="16" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="18" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="LargerSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="18" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="20" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="BigSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="20" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="22" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="ExtraBigSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="24" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="32" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="HugeSize"
+                        x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="32" />
+                <On Platform="Android, UWP, WinRT, WinPhone" Value="48" />
+            </OnPlatform>
+
+            <!--  CONVERTERS -->
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:ListIsEmptyShowConverter x:Key="ListIsEmptyShowConverter" />
+            <converters:ListIsEmptyHideConverter x:Key="ListIsEmptyHideConverter" />
+            <converters:EditOrAddExpandeConverter x:Key="EditOrAddExpandeConverter" />
+            <converters:EditOrAddExpandeTwoConverter x:Key="EditOrAddExpandeTwoConverter" />
+            <converters:ChatColorConverter x:Key="ChatColorConverter" />
+            <converters:ChatToRightConverter x:Key="ChatToRightConverter" />
+            <converters:ChartMaxMinConverter x:Key="ChartMaxMinConverter" />
+            <converters:ChartIsCorrenteConverter x:Key="ChartIsCorrenteConverter" />
+            <converters:ChartIsContagemConverter x:Key="ChartIsContagemConverter" />
+
+
+
+              <!-- EXPLICIT STYLES -->
+                <Style x:Key="ValidationErrorLabelStyle"
+                   TargetType="{x:Type Label}">
+                   <Setter Property="TextColor"
+                           Value="{StaticResource ErrorColor}" />
+                   <Setter Property="FontSize"
+                           Value="{StaticResource LittleSize}" />
+            </Style>
+            
+                   <Style x:Key="EntryStyle"
+                   TargetType="{x:Type Entry}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource MontserratRegular}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="PlaceholderColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource LargeSize}" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="BackgroundColor" 
+                        Value="Transparent" />
+                <Setter Property="Opacity"
+                        Value="0.6" />
+                <Setter Property="behaviors:LineColorBehavior.ApplyLineColor"
+                        Value="True" />
+                <Setter Property="behaviors:LineColorBehavior.LineColor"
+                        Value="{StaticResource BlackColor}" />
+                <Style.Triggers>
+                    <Trigger TargetType="Entry"
+                             Property="IsFocused" 
+                             Value="True">
+                        <Setter Property="Opacity" Value="1" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="UwpEntryStyle"
+                   TargetType="{x:Type Entry}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource MontserratRegular}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="PlaceholderColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource LargeSize}" />
+                <Setter Property="HorizontalOptions"                      
+                        Value="FillAndExpand" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="BackgroundColor" 
+                        Value="Transparent" />
+                <Setter Property="Opacity"
+                        Value="0.6" />
+                <Setter Property="behaviors:LineColorBehavior.ApplyLineColor"
+                        Value="True" />
+                <Setter Property="behaviors:LineColorBehavior.LineColor"
+                        Value="Gray" />
+                <Style.Triggers>
+                    <Trigger TargetType="Entry"
+                       Property="IsFocused"
+                       Value="True">
+                        <Setter Property="Opacity" Value="1" />
+                        <Setter Property="behaviors:LineColorBehavior.LineColor"                        
+                                Value="{StaticResource BlueColor}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- IMPLICIT STYLES -->
+               <Style TargetType="Entry" >
+                <Setter Property="TextColor" Value="{ StaticResource TextColor }" />
+                <Setter Property="PlaceholderColor" Value="{ StaticResource LightTextColor }" />
+           <!--     <Setter Property="BackgroundColor" Value="{ StaticResource EntryBackgroundColor }" /> -->
+            </Style>
+
+            <Style TargetType="ImageCell" ApplyToDerivedTypes="True" CanCascade="True">
+                <Setter Property="TextColor" Value="{ StaticResource InverseTextColor }" />
+                <Setter Property="DetailColor" Value="{ StaticResource BlackColor }" />
+            </Style>
+
+            <Style TargetType="TextCell" ApplyToDerivedTypes="True" CanCascade="True">
+                <Setter Property="TextColor" Value="{ StaticResource InverseTextColor }" />
+                <Setter Property="DetailColor" Value="{ StaticResource BlackColor }" />
+            </Style>
+
+            <Style TargetType="ListView" ApplyToDerivedTypes="True" CanCascade="True">
+           <!--     <Setter Property="BackgroundColor" Value="{ StaticResource ThemeListViewBackgroundColor }" /> -->
+                <Setter Property="SeparatorColor" Value="{ StaticResource LightGreyColor }" />
+                <Setter Property="SeparatorVisibility" Value="Default" />
+            </Style>
+
+            <Style TargetType="ActivityIndicator" ApplyToDerivedTypes="True" CanCascade="True">
+                <Setter Property="Color" Value="{ StaticResource DarkGreenColor }" />
+            </Style>
+            
+           <Style TargetType="NavigationPage" ApplyToDerivedTypes="True" CanCascade="True">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource BlueColor}"/>
+                <Setter Property="BarTextColor" Value="{StaticResource WhiteColor}"/>
+            </Style>  
+                          
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

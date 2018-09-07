@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Industria4.Pages.SensorPage"
+             Title="{i18n:Translate SENSOR } "
+             xmlns:i18n="clr-namespace:Industria4.Helpers"
+             xmlns:animations="clr-namespace:Industria4.Animations;assembly=Industria4"
+              xmlns:converters="clr-namespace:Industria4.Converters;assembly=Industria4"
+              xmlns:triggers="clr-namespace:Industria4.Triggers;assembly=Industria4"
+              xmlns:behaviors="clr-namespace:Industria4.Behaviors;assembly=Industria4"
+              xmlns:templates="clr-namespace:Industria4.Views.Templates;assembly=Industria4">
+ <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+            
+              <Style x:Key="HeaderItemHeaderLabelStyle"
+               TargetType="{x:Type Label}">
+            <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource BigSize}" /> 
+            <Setter Property="FontAttributes"
+                    Value="Bold" /> 
+        </Style>
+        
+        <Style x:Key="HeaderItemLabelStyle"
+               TargetType="{x:Type Label}">
+            <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource BigSize}" />  
+        </Style>
+            
+           <Style x:Key="ItemHeaderLabelStyle"
+                TargetType="{x:Type Label}">
+             <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="HorizontalOptions"
+                    Value="Start" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource BlueColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource LargeSize}" /> 
+            <Setter Property="FontAttributes"
+                    Value="Bold" />         
+        </Style>   
+
+              <Style x:Key="ItemLabelStyle" 
+               TargetType="{x:Type Label}">
+              <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="HorizontalOptions"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource BlackColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource LargeSize}" />       
+        </Style>
+
+            <Style x:Key="EntryStyle"
+                   TargetType="{x:Type Entry}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource MontserratRegular}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="PlaceholderColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource LargeSize}" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="BackgroundColor" 
+                        Value="Transparent" />
+                <Setter Property="Opacity"
+                        Value="0.6" />
+            </Style>
+      
+            
+            </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout Orientation="Horizontal">
+             
+         <Grid Margin="2"  HorizontalOptions="FillAndExpand" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="50*" />
+                </Grid.ColumnDefinitions>
+
+            <StackLayout  Grid.Row="0" Grid.Column="0"  HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="{StaticResource LightGreyColor}" Margin="1" Padding="5" >
+               
+                        <Label Text="{i18n:Translate CodigoSensor }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                        <Entry Text="{Binding CodigoSensor.Value}" Style="{StaticResource EntryStyle}">
+                         <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding ValidateCodigoSensorCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                        Binding="{Binding CodigoSensor.IsValid}"
+                                        Value="False">
+                                        <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                         <Label Text="{Binding CodigoSensor.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                        <Label Text="{i18n:Translate IdModulo }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                        <Picker SelectedItem="{Binding SelectedItemModuloAquisicao}" ItemsSource="{Binding ModulosAquisicao}" ItemDisplayBinding="{Binding NomeModuloAquisicao }"/>
+
+                        <Label Text="{i18n:Translate SensorNome }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                        <Entry Text="{Binding NomeSensor.Value}" Style="{StaticResource EntryStyle}">
+                         <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding ValidateNomeSensorCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                        Binding="{Binding NomeSensor.IsValid}"
+                                        Value="False">
+                                        <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                         <Label Text="{Binding NomeSensor.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                        <Label Text="{i18n:Translate ValorMax }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                        <Entry Text="{Binding ValorMax.Value}" Style="{StaticResource EntryStyle}">
+                         <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding ValidateValorMaxCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                        Binding="{Binding ValorMax.IsValid}"
+                                        Value="False">
+                                        <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                         <Label Text="{Binding ValorMax.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                        <Label Text="{i18n:Translate ValorMin }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                        <Entry Text="{Binding ValorMin.Value}" Style="{StaticResource EntryStyle}">
+                         <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding ValidateValorMinCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                        Binding="{Binding ValorMin.IsValid}"
+                                        Value="False">
+                                        <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                         <Label Text="{Binding ValorMin.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           Style="{StaticResource ValidationErrorLabelStyle}" />
+
+
+                        <Label Text="{i18n:Translate Observacoes }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                        <Entry Text="{Binding Observacoes}" Style="{StaticResource EntryStyle}"/>
+                    
+                     <Label Text="{i18n:Translate CreatedAt }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                     <Entry Text="{Binding CreatedAt}" Style="{StaticResource EntryStyle}"/>
+
+                     <Label Text="{i18n:Translate Tempo }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                     <Entry Text="{Binding Tempo.Value}" Style="{StaticResource EntryStyle}">
+                          <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding ValidateTempoCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                        Binding="{Binding Tempo.IsValid}"
+                                        Value="False">
+                                        <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                         <Label Text="{Binding Tempo.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                </StackLayout>
+            
+                <StackLayout  Grid.Row="0" Grid.Column="1"   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource LightGreyColor}" Margin="1" Padding="15" >
+                    
+                    <Label Text="{i18n:Translate IdTipoPorta }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                    <Picker SelectedItem="{Binding SelectedItemTipoPorta}" ItemsSource="{Binding TiposPorta}" ItemDisplayBinding="{Binding Tporta }"/> 
+
+                        
+                     <Label Text="{i18n:Translate numPorta }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                     <Picker SelectedItem="{Binding SelectedNumPorta}" ItemsSource="{Binding NumPorta}" /> 
+
+                        
+                    <Label Text="{i18n:Translate Code }" IsVisible="{Binding CodeVisible}" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                     <Entry Text="{Binding Code.Value}" IsVisible="{Binding CodeVisible}" Style="{StaticResource EntryStyle}">
+                       <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding ValidateCodeCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                        Binding="{Binding Code.IsValid}"
+                                        Value="False">
+                                        <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                         <Label IsVisible="{Binding CodeVisible}" Text="{Binding Code.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                     <Label Text="{i18n:Translate Fator }" IsVisible="{Binding FatorVisible}" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                     <Entry Text="{Binding Fator.Value}" IsVisible="{Binding FatorVisible}" Style="{StaticResource EntryStyle}">
+                       <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding ValidateFatorCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                        Binding="{Binding Fator.IsValid}"
+                                        Value="False">
+                                        <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                         <Label  IsVisible="{Binding FatorVisible}" Text="{Binding Fator.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                        
+
+                    <Label Text="{i18n:Translate IdGrandeza }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                    <Picker SelectedItem="{Binding SelectedItemTipoGrandeza}" ItemsSource="{Binding TiposGrandezas}" ItemDisplayBinding="{Binding Grandeza }"/> 
+
+                    <Label Text="{i18n:Translate ISENABLE }" Style="{StaticResource ItemHeaderLabelStyle}"/>    
+                    <Switch IsToggled="{Binding Active}" />
+                
+                    <Button  Command="{Binding GuardarSensor}" HorizontalOptions="FillAndExpand"  Text="{i18n:Translate GuardarSensor }"/>                
+
+              </StackLayout>
+            </Grid>
+
+           </StackLayout>
+        </ScrollView>
+        </ContentPage.Content>
+</ContentPage>

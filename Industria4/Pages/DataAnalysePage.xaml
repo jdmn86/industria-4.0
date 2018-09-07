@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Industria4.Pages.DataAnalysePage"
+             Title="{i18n:Translate ANALISEDEDADOS }"
+             xmlns:animations="clr-namespace:Industria4.Animations;assembly=Industria4"
+             xmlns:converters="clr-namespace:Industria4.Converters;assembly=Industria4"
+             xmlns:triggers="clr-namespace:Industria4.Triggers;assembly=Industria4"
+             xmlns:behaviors="clr-namespace:Industria4.Behaviors;assembly=Industria4"
+             xmlns:templates="clr-namespace:Industria4.Views.Templates;assembly=Industria4"   
+             xmlns:controls="clr-namespace:Industria4.Controls;assembly=Industria4"
+             xmlns:i18n="clr-namespace:Industria4.Helpers"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:local="clr-namespace:Industria4.Pages;assembly=Industria4">
+   <ContentPage.Resources>
+        <ResourceDictionary>
+              <Style x:Key="HeaderItemHeaderLabelStyle"
+               TargetType="{x:Type Label}">
+            <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource BigSize}" /> 
+            <Setter Property="FontAttributes"
+                    Value="Bold" /> 
+        </Style>
+        
+        <Style x:Key="HeaderItemLabelStyle"
+               TargetType="{x:Type Label}">
+            <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource BigSize}" />  
+        </Style>
+            
+           <Style x:Key="ItemHeaderLabelStyle"
+                TargetType="{x:Type Label}">
+             <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="HorizontalOptions"
+                    Value="Start" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource BlueColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource LargeSize}" /> 
+            <Setter Property="FontAttributes"
+                    Value="Bold" />         
+        </Style>   
+
+              <Style x:Key="ItemLabelStyle" 
+               TargetType="{x:Type Label}">
+              <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="HorizontalOptions"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource BlackColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource LargeSize}" />       
+        </Style>
+
+            <Style x:Key="EntryStyle"
+                   TargetType="{x:Type Entry}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource MontserratRegular}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="PlaceholderColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource LargeSize}" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="BackgroundColor" 
+                        Value="Transparent" />
+                <Setter Property="Opacity"
+                        Value="0.6" />
+            </Style>
+            
+            </ResourceDictionary>
+    </ContentPage.Resources>
+
+<!--   <ContentPage.Title >
+        <OnPlatform x:TypeArguments="x:String" Default="{i18n:Translate ANALISEDEDADOS}"/>
+    </ContentPage.Title>  -->
+
+        <ContentPage.Content>
+          <Grid HorizontalOptions="FillAndExpand" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*" />
+                    <ColumnDefinition Width="85*" />
+                </Grid.ColumnDefinitions>
+
+     <ListView Grid.Row="0" Grid.Column="0" x:Name="lstView" ItemsSource="{Binding ListaMaquinasSensores}"
+    GroupDisplayBinding="{Binding maquina.NomeMaquina}" Margin="0,1,0,0" RowHeight="30" BackgroundColor="{StaticResource LightGreyColor}"
+    GroupShortNameBinding="{Binding maquina.NomeMaquina}"
+    IsGroupingEnabled="true" SeparatorVisibility="Default" 
+    behaviors:ItemTappedCommandListView.ItemTappedCommand="{Binding GetItemViewCommand}">
+      <ListView.ItemTemplate>
+        <DataTemplate>                   
+                <ViewCell >
+                    <StackLayout Orientation="Horizontal" Margin="0" Padding="0" BackgroundColor="{StaticResource VeryLightBlueColor}"  VerticalOptions="Fill" HorizontalOptions="FillAndExpand" >
+                        <Label HorizontalOptions="FillAndExpand" Margin="0"  VerticalOptions="Fill" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Text="{Binding NomeSensor}" TextColor="Black" FontSize="15"></Label>
+                    </StackLayout>
+                </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+      <ListView.GroupHeaderTemplate>
+        <DataTemplate >
+          <ViewCell >
+                <StackLayout Orientation="Horizontal" Margin="0" BackgroundColor="{StaticResource BlueColor}" >
+                    <Label HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  Text="{Binding maquina.NomeMaquina}" TextColor="Black" FontSize="20"></Label>
+                </StackLayout>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.GroupHeaderTemplate>
+    </ListView>
+
+
+
+   <StackLayout Grid.Row="0" Grid.Column="1"   IsVisible="{Binding sensor, Converter={StaticResource ChartMaxMinConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+      <Grid IsVisible="{Binding sensor, Converter={StaticResource ChartMaxMinConverter}}" HorizontalOptions="FillAndExpand" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="85*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85*" />
+                <ColumnDefinition Width="15*" />
+            </Grid.ColumnDefinitions>    
+
+        <StackLayout  IsVisible="{Binding sensor, Converter={StaticResource ChartMaxMinConverter}}"   Grid.Row="1" Grid.Column="0"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  >
+
+                    <chart:SfChart x:Name="ChartMaxMin" IsVisible="{Binding IsMaxMin}" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+                    
+                    <chart:SfChart.PrimaryAxis>
+                        
+                        <chart:CategoryAxis   LabelRotationAngle="45">
+                            
+                            <chart:CategoryAxis.Title>
+                                
+                                <chart:ChartAxisTitle Text="{Binding labelEixoX}"/>
+
+                            </chart:CategoryAxis.Title>
+                                              
+                        </chart:CategoryAxis>
+
+                    </chart:SfChart.PrimaryAxis>
+                    
+                    <chart:SfChart.SecondaryAxis>
+                    
+                        <chart:NumericalAxis ShowMajorGridLines="false" ShowMinorGridLines="false">
+                        
+                            <chart:NumericalAxis.Title>
+                        
+                                <chart:ChartAxisTitle Text="{Binding labelEixoY}"/>
+                        
+                            </chart:NumericalAxis.Title>
+                        
+                        </chart:NumericalAxis>
+                    
+                    </chart:SfChart.SecondaryAxis>
+
+                    <chart:SfChart.Series>
+
+                        <chart:FastLineSeries x:Name="seriesMaxMin" ItemsSource ="{Binding ListaSF}" 
+                                              StrokeWidth="1"
+                                              ListenPropertyChange="True" 
+                                              EnableAnimation="true" > 
+
+                            <chart:LineSeries.DataMarker >
+
+                               <chart:ChartDataMarker ShowLabel="True"  >
+
+                                    <chart:ChartDataMarker.LabelStyle>
+
+                                        <chart:DataMarkerLabelStyle TextColor="Black"
+                                                                    BorderColor="Yellow" 
+                                                                    BorderThickness="1"
+                                                                    BackgroundColor="Transparent"
+                                                                    Angle="90"
+                                                                    LabelPadding="5"
+                                                                    Margin="1"
+                                                                    Font="Italic,18"/>
+
+                                    </chart:ChartDataMarker.LabelStyle>
+
+                                </chart:ChartDataMarker>
+
+                          </chart:LineSeries.DataMarker>
+                                        
+                        </chart:FastLineSeries> 
+                                    
+                    </chart:SfChart.Series>
+
+                    <chart:SfChart.ChartBehaviors>
+            
+                        <chart:ChartZoomPanBehavior EnableZooming="true"  EnableDoubleTap = "true" EnablePanning="true"  ZoomMode="XY">
+                           
+                        </chart:ChartZoomPanBehavior>
+
+                 </chart:SfChart.ChartBehaviors>
+                                
+                <chart:SfChart.ChartAnnotations>
+                    <chart:HorizontalLineAnnotation Y1="{Binding Maximo}" Text="Maximo" ShowAxisLabel="true">
+
+                        <chart:HorizontalLineAnnotation.AxisLabelStyle>
+
+                            <chart:ChartLabelStyle Margin="5"  Font="Italic,12" BorderColor="Red" BorderThickness="2" BackgroundColor="Red" TextColor="White"/>
+
+                        </chart:HorizontalLineAnnotation.AxisLabelStyle>
+
+                    </chart:HorizontalLineAnnotation>
+
+                     <chart:HorizontalLineAnnotation Y2="{Binding Minimo}" Text="Minimo" ShowAxisLabel="true">
+
+                        <chart:HorizontalLineAnnotation.AxisLabelStyle>
+
+                            <chart:ChartLabelStyle Margin="5" Font="Italic,12" BorderColor="Red" BorderThickness="2" BackgroundColor="Red" TextColor="White"/>
+
+                        </chart:HorizontalLineAnnotation.AxisLabelStyle>
+
+                    </chart:HorizontalLineAnnotation>
+                                    
+                </chart:SfChart.ChartAnnotations>
+                                
+            </chart:SfChart>
+                 </StackLayout>
+              <StackLayout  IsVisible="{Binding IsMaxMin}" Grid.Row="0" Grid.Column="0"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+
+                            <Label Text="{Binding nomeGrafico}"  FontSize="20" TextColor="Black" FontAttributes="Bold" Margin="0,10,0,0"/> 
+                            <DatePicker MinimumDate="2000-01-01" 
+                                    MaximumDate="2030-01-01" 
+                                    Date="{Binding SelectedDateInit}"/>
+                            
+                            <TimePicker Time="{Binding SelectedTimeInit}"/>
+                            
+                            <DatePicker MinimumDate="2000-01-01" 
+                                    MaximumDate="2030-01-01" 
+                                    Date="{Binding SelectedDateEnd}"/>
+                            
+                            <TimePicker Time="{Binding SelectedTimeEnd}"/>
+                            
+                            <Button   Command="{Binding GetItemDetailsMaxMinCommand}" HorizontalOptions="Start" Text="Pesquisar Valores"/>
+                            <Button   Command="{Binding GetItemDetailRealDataMaxMinCommand}" HorizontalOptions="Start" Text="Last Date"/>
+                </StackLayout>  
+
+                <StackLayout Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Padding="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource LightGreyColor}"  >
+                    <Label Text="{i18n:Translate Media}" BackgroundColor="{StaticResource BlueColor}" /><Label Text="{Binding Media}" />
+                    <Label Text="{i18n:Translate Maximo}" /><Label Text="{Binding Maximo}" />
+                    <Label Text="{i18n:Translate Minimo}" /><Label Text="{Binding Minimo}" />
+                </StackLayout>
+                        
+                 </Grid>   
+    </StackLayout>
+
+
+
+             <StackLayout Grid.Row="0" Grid.Column="1"  IsVisible="{Binding sensor, Converter={StaticResource ChartIsCorrenteConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+      <Grid   IsVisible="{Binding sensor, Converter={StaticResource ChartIsCorrenteConverter}}"  HorizontalOptions="FillAndExpand" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="85*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85*" />
+                <ColumnDefinition Width="15*" />
+            </Grid.ColumnDefinitions>    
+
+        <StackLayout  IsVisible="{Binding sensor, Converter={StaticResource ChartIsCorrenteConverter}}"  Grid.Row="1" Grid.Column="0"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  >
+
+                    <chart:SfChart x:Name="ChartCorrente" IsVisible="{Binding IsCorrente}" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+                    
+                    <chart:SfChart.PrimaryAxis>
+                        
+                        <chart:CategoryAxis   LabelRotationAngle="45">
+                            
+                            <chart:CategoryAxis.Title>
+                                
+                                <chart:ChartAxisTitle Text="{Binding labelEixoX}"/>
+
+                            </chart:CategoryAxis.Title>
+                                              
+                        </chart:CategoryAxis>
+
+                    </chart:SfChart.PrimaryAxis>
+                    
+                    <chart:SfChart.SecondaryAxis>
+                    
+                        <chart:NumericalAxis ShowMajorGridLines="false" ShowMinorGridLines="false">
+                        
+                            <chart:NumericalAxis.Title>
+                        
+                                <chart:ChartAxisTitle Text="{Binding labelEixoY}"/>
+                        
+                            </chart:NumericalAxis.Title>
+                        
+                        </chart:NumericalAxis>
+                    
+                    </chart:SfChart.SecondaryAxis>
+
+                    <chart:SfChart.Series>
+
+                        <chart:FastLineSeries x:Name="seriesCorrente" ItemsSource ="{Binding ListaSFCorrente}" 
+                                              StrokeWidth="1"
+                                              ListenPropertyChange="True" 
+                                              EnableAnimation="true" > 
+
+                            <chart:LineSeries.DataMarker >
+
+                               <chart:ChartDataMarker ShowLabel="True"  >
+
+                                    <chart:ChartDataMarker.LabelStyle>
+
+                                        <chart:DataMarkerLabelStyle TextColor="Black"
+                                                                    BorderColor="Yellow" 
+                                                                    BorderThickness="1"
+                                                                    BackgroundColor="Transparent"
+                                                                    Angle="90"
+                                                                    LabelPadding="5"
+                                                                    Margin="1"
+                                                                    Font="Italic,18"/>
+
+                                    </chart:ChartDataMarker.LabelStyle>
+
+                                </chart:ChartDataMarker>
+
+                          </chart:LineSeries.DataMarker>
+                                        
+                        </chart:FastLineSeries> 
+                                    
+                    </chart:SfChart.Series>
+
+                    <chart:SfChart.ChartBehaviors>
+            
+                        <chart:ChartZoomPanBehavior EnableZooming="true"  EnableDoubleTap = "true" EnablePanning="true"  ZoomMode="XY">
+                           
+                        </chart:ChartZoomPanBehavior>
+
+                 </chart:SfChart.ChartBehaviors>
+                                
+                <chart:SfChart.ChartAnnotations>
+                    <chart:HorizontalLineAnnotation Y1="{Binding Maximo}" Text="Maximo" ShowAxisLabel="true">
+
+                        <chart:HorizontalLineAnnotation.AxisLabelStyle>
+
+                            <chart:ChartLabelStyle Margin="5"  Font="Italic,12" BorderColor="Red" BorderThickness="2" BackgroundColor="Red" TextColor="White"/>
+
+                        </chart:HorizontalLineAnnotation.AxisLabelStyle>
+
+                    </chart:HorizontalLineAnnotation>
+
+                     <chart:HorizontalLineAnnotation Y2="{Binding Minimo}" Text="Minimo" ShowAxisLabel="true">
+
+                        <chart:HorizontalLineAnnotation.AxisLabelStyle>
+
+                            <chart:ChartLabelStyle Margin="5" Font="Italic,12" BorderColor="Red" BorderThickness="2" BackgroundColor="Red" TextColor="White"/>
+
+                        </chart:HorizontalLineAnnotation.AxisLabelStyle>
+
+                    </chart:HorizontalLineAnnotation>
+                                    
+                </chart:SfChart.ChartAnnotations>
+                                
+            </chart:SfChart>
+                 </StackLayout>
+              <StackLayout  IsVisible="{Binding IsCorrente}" Grid.Row="0" Grid.Column="0"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+
+                            <Label Text="{Binding nomeGrafico}"  FontSize="20" TextColor="Black" FontAttributes="Bold" Margin="0,10,0,0"/> 
+                            <DatePicker MinimumDate="2000-01-01" 
+                                    MaximumDate="2030-01-01" 
+                                    Date="{Binding SelectedDateInit}"/>
+                            
+                            <TimePicker Time="{Binding SelectedTimeInit}"/>
+                            
+                            <DatePicker MinimumDate="2000-01-01" 
+                                    MaximumDate="2030-01-01" 
+                                    Date="{Binding SelectedDateEnd}"/>
+                            
+                            <TimePicker Time="{Binding SelectedTimeEnd}"/>
+                            
+                            <Button   Command="{Binding GetItemDetailsCorrenteCommand}" HorizontalOptions="Start" Text="Pesquisar Valores"/>
+                            <Button   Command="{Binding GetItemDetailRealDataCorrentCommand}" HorizontalOptions="Start" Text="Last Date"/>
+                </StackLayout>  
+
+                <StackLayout Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Padding="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource LightGreyColor}"  >
+                    <Label Text="{i18n:Translate Media}" BackgroundColor="{StaticResource BlueColor}" /><Label Text="{Binding Media}" />
+                    <Label Text="{i18n:Translate Maximo}" /><Label Text="{Binding Maximo}" />
+                    <Label Text="{i18n:Translate Minimo}" /><Label Text="{Binding Minimo}" />
+                </StackLayout>
+                        
+                 </Grid>   
+    </StackLayout>
+
+
+      <StackLayout Grid.Row="0" Grid.Column="1"  IsVisible="{Binding sensor, Converter={StaticResource ChartIsContagemConverter}}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+      <Grid  IsVisible="{Binding sensor, Converter={StaticResource ChartIsContagemConverter}}" HorizontalOptions="FillAndExpand" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="85*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85*" />
+                <ColumnDefinition Width="15*" />
+            </Grid.ColumnDefinitions>    
+
+        <StackLayout  IsVisible="{Binding sensor, Converter={StaticResource ChartIsContagemConverter}}"  Grid.Row="1" Grid.Column="0"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  >
+
+                    <chart:SfChart x:Name="ChartContagem" IsVisible="{Binding IsContagem}" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+                    
+                    <chart:SfChart.PrimaryAxis>
+                        
+                        <chart:CategoryAxis   LabelRotationAngle="45">
+                            
+                            <chart:CategoryAxis.Title>
+                                
+                                <chart:ChartAxisTitle Text="{Binding labelEixoX}"/>
+
+                            </chart:CategoryAxis.Title>
+                                              
+                        </chart:CategoryAxis>
+
+                    </chart:SfChart.PrimaryAxis>
+                    
+                    <chart:SfChart.SecondaryAxis>
+                    
+                        <chart:NumericalAxis ShowMajorGridLines="false" ShowMinorGridLines="false">
+                        
+                            <chart:NumericalAxis.Title>
+                        
+                                <chart:ChartAxisTitle Text="{Binding labelEixoY}"/>
+                        
+                            </chart:NumericalAxis.Title>
+                        
+                        </chart:NumericalAxis>
+                    
+                    </chart:SfChart.SecondaryAxis>
+
+                    <chart:SfChart.Series>
+
+                        <chart:FastLineSeries x:Name="seriesContagem" ItemsSource ="{Binding ListaSFContagem}" 
+                                              StrokeWidth="1"
+                                              ListenPropertyChange="True" 
+                                              EnableAnimation="true" > 
+
+                            <chart:LineSeries.DataMarker >
+
+                               <chart:ChartDataMarker ShowLabel="True"  >
+
+                                    <chart:ChartDataMarker.LabelStyle>
+
+                                        <chart:DataMarkerLabelStyle TextColor="Black"
+                                                                    BorderColor="Yellow" 
+                                                                    BorderThickness="1"
+                                                                    BackgroundColor="Transparent"
+                                                                    Angle="90"
+                                                                    LabelPadding="5"
+                                                                    Margin="1"
+                                                                    Font="Italic,18"/>
+
+                                    </chart:ChartDataMarker.LabelStyle>
+
+                                </chart:ChartDataMarker>
+
+                          </chart:LineSeries.DataMarker>
+                                        
+                        </chart:FastLineSeries> 
+                                    
+                    </chart:SfChart.Series>
+
+                    <chart:SfChart.ChartBehaviors>
+            
+                        <chart:ChartZoomPanBehavior EnableZooming="true"  EnableDoubleTap = "true" EnablePanning="true"  ZoomMode="XY">
+                           
+                        </chart:ChartZoomPanBehavior>
+
+                 </chart:SfChart.ChartBehaviors>
+                                
+                <chart:SfChart.ChartAnnotations>
+                    <chart:HorizontalLineAnnotation Y1="{Binding Maximo}" Text="Maximo" ShowAxisLabel="true">
+
+                        <chart:HorizontalLineAnnotation.AxisLabelStyle>
+
+                            <chart:ChartLabelStyle Margin="5"  Font="Italic,12" BorderColor="Red" BorderThickness="2" BackgroundColor="Red" TextColor="White"/>
+
+                        </chart:HorizontalLineAnnotation.AxisLabelStyle>
+
+                    </chart:HorizontalLineAnnotation>
+
+                     <chart:HorizontalLineAnnotation Y2="{Binding Minimo}" Text="Minimo" ShowAxisLabel="true">
+
+                        <chart:HorizontalLineAnnotation.AxisLabelStyle>
+
+                            <chart:ChartLabelStyle Margin="5" Font="Italic,12" BorderColor="Red" BorderThickness="2" BackgroundColor="Red" TextColor="White"/>
+
+                        </chart:HorizontalLineAnnotation.AxisLabelStyle>
+
+                    </chart:HorizontalLineAnnotation>
+                                    
+                </chart:SfChart.ChartAnnotations>
+                                
+            </chart:SfChart>
+                 </StackLayout>
+              <StackLayout  IsVisible="{Binding IsContagem}" Grid.Row="0" Grid.Column="0"  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+
+                            <Label Text="{Binding nomeGrafico}"  FontSize="20" TextColor="Black" FontAttributes="Bold" Margin="0,10,0,0"/> 
+                            <DatePicker MinimumDate="2000-01-01" 
+                                    MaximumDate="2030-01-01" 
+                                    Date="{Binding SelectedDateInit}"/>
+                            
+                            <DatePicker MinimumDate="2000-01-01" 
+                                    MaximumDate="2030-01-01" 
+                                    Date="{Binding SelectedDateEnd}"/>
+                            
+
+                            <Button   Command="{Binding GetItemDetailsContagemCommand}" HorizontalOptions="Start" Text="Pesquisar Valores"/>
+                            <Button   Command="{Binding GetItemDetailRealDataContagemCommand}" HorizontalOptions="Start" Text="Last Date"/>
+
+                </StackLayout>  
+
+                <StackLayout Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Padding="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource LightGreyColor}"  >
+                    <Label Text="{i18n:Translate Media}" BackgroundColor="{StaticResource BlueColor}" /><Label Text="{Binding Media}" />
+                    <Label Text="Total" /><Label Text="{Binding Total}" />
+                    <Button  Command="{Binding ResetSensorContagemCommand}" HorizontalOptions="FillAndExpand"  Text="ResetSensor"/>                
+
+                </StackLayout>
+                        
+                 </Grid>   
+    </StackLayout>
+       </Grid>
+     </ContentPage.Content>
+
+</ContentPage>

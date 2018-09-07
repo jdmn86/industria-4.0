@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{708E4C33-0398-4290-8668-EC01752B7B9A}</ProjectGuid>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Industria4</RootNamespace>
+    <AssemblyName>Industria4</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App.xaml" />
+    <EmbeddedResource Include="Resources\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AppResources.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ItemFabricaTemplateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ItemUserTemplateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ItemMaquinaTemplateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\CustomNavigationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ListaFabricasPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\MenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\DataAnalysePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\FabricaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ListaUsersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ListaSensoresPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ListaModulosAquisicaoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ListaMaquinasPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\UserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\SensorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ModuloAquisicaoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\MaquinaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\iOSMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Base\ExtendedBindableObject.cs" />
+    <Compile Include="ViewModels\Base\MessengerKeys.cs" />
+    <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModels\Base\ViewModelLocator.cs" />
+    <Compile Include="ViewModels\DataAnalyseViewModel.cs" />
+    <Compile Include="ViewModels\FabricaViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\ListaFabricasViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MaquinasViewModel.cs" />
+    <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="ViewModels\ModuloAquisicaoViewModel.cs" />
+    <Compile Include="ViewModels\ModulosAquisicaoViewModel.cs" />
+    <Compile Include="ViewModels\SensoresViewModel.cs" />
+    <Compile Include="ViewModels\SensorViewModel.cs" />
+    <Compile Include="ViewModels\TiposPortaViewModel.cs" />
+    <Compile Include="ViewModels\UsersViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="Validations\IsNotNullOrEmptyStringRule.cs" />
+    <Compile Include="Validations\IValidationRule.cs" />
+    <Compile Include="Validations\IValidity.cs" />
+    <Compile Include="Validations\ValidatableObject.cs" />
+    <Compile Include="Triggers\BeginAnimation.cs" />
+    <Compile Include="Services\Dialog\DialogService.cs" />
+    <Compile Include="Services\Dialog\IDialogService.cs" />
+    <Compile Include="Services\Navigation\INavigationService.cs" />
+    <Compile Include="Services\Navigation\NavigationService.cs" />
+    <Compile Include="Models\ChangePasswordBindingModel.cs" />
+    <Compile Include="Models\Fabrica.cs" />
+    <Compile Include="Models\Maquina.cs" />
+    <Compile Include="Models\MenuItem.cs" />
+    <Compile Include="Models\ModuloAquisicao.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\RoleBindingModels.cs" />
+    <Compile Include="Models\Sensor.cs" />
+    <Compile Include="Models\TiposGrandeza.cs" />
+    <Compile Include="Models\TiposPorta.cs" />
+    <Compile Include="Models\ValoresSensores.cs" />
+    <Compile Include="Models\Enums\MenuItemType.cs" />
+    <Compile Include="Models\User\AspNetUser.cs" />
+    <Compile Include="Models\User\AuthenticationRequest.cs" />
+    <Compile Include="Models\User\AuthenticationResponse.cs" />
+    <Compile Include="Models\User\responseRegister.cs" />
+    <Compile Include="Models\User\User.cs" />
+    <Compile Include="Helpers\EasingHelper.cs" />
+    <Compile Include="Helpers\OnCustomPlatform.cs" />
+    <Compile Include="Helpers\RandomNumberGenerator.cs" />
+    <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Helpers\TranslateExtention.cs" />
+    <Compile Include="Exceptions\ServiceAuthenticationException.cs" />
+    <Compile Include="Effects\EntryLineColorEffect.cs" />
+    <Compile Include="Converters\FirstValidationErrorConverter.cs" />
+    <Compile Include="Converters\InverseBoolConverter.cs" />
+    <Compile Include="Converters\TextToByteConverter.cs" />
+    <Compile Include="Converters\WebNavigatedEventArgsConverter.cs" />
+    <Compile Include="Converters\WebNavigatingEventArgsConverter.cs" />
+    <Compile Include="Controls\FloatingActionButtonSize.cs" />
+    <Compile Include="Behaviors\Base\BindableBehavior.cs" />
+    <Compile Include="Behaviors\BeginAnimationBehavior.cs" />
+    <Compile Include="Behaviors\EventToCommandBehavior.cs" />
+    <Compile Include="Behaviors\ItemTappedCommandListView.cs" />
+    <Compile Include="Behaviors\LineColorBehavior.cs" />
+    <Compile Include="Behaviors\MaxLengthTextBehavior.cs" />
+    <Compile Include="Behaviors\TurnValidOnFocusBehavior.cs" />
+    <Compile Include="Behaviors\ValidateOnLostFocusBehavior.cs" />
+    <Compile Include="Behaviors\ValidateOnTextChangedBehavior.cs" />
+    <Compile Include="Animations\Base\AnimationBase.cs" />
+    <Compile Include="Animations\Base\EasingType.cs" />
+    <Compile Include="Animations\FadeToAnimation.cs" />
+    <Compile Include="Animations\RotateToAnimation.cs" />
+    <Compile Include="Animations\ScaleToAnimation.cs" />
+    <Compile Include="Animations\StoryBoard.cs" />
+    <Compile Include="Animations\TranslateToAnimation.cs" />
+    <Compile Include="Resources\AppResources.Designer.cs">
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AppResources.en.Designer.cs">
+      <DependentUpon>AppResources.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ItemFabricaTemplateView.xaml.cs">
+      <DependentUpon>ItemFabricaTemplateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ItemUserTemplateView.xaml.cs">
+      <DependentUpon>ItemUserTemplateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ItemMaquinaTemplateView.xaml.cs">
+      <DependentUpon>ItemMaquinaTemplateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataServices\Accounts\AccountService.cs" />
+    <Compile Include="DataServices\Accounts\IAccountService.cs" />
+    <Compile Include="DataServices\Auth\AuthenticationService.cs" />
+    <Compile Include="DataServices\Auth\IAuthenticationService.cs" />
+    <Compile Include="DataServices\Base\HttpRequestExceptionEx.cs" />
+    <Compile Include="DataServices\Base\IRequestProvider.cs" />
+    <Compile Include="DataServices\Base\RequestProvider.cs" />
+    <Compile Include="DataServices\Base\ServiceAuthenticationException.cs" />
+    <Compile Include="DataServices\Fabricas\FabricaService.cs" />
+    <Compile Include="DataServices\Fabricas\IFabricaService.cs" />
+    <Compile Include="DataServices\Grandezas\ITiposGrandezasService.cs" />
+    <Compile Include="DataServices\Grandezas\TiposGrandezasService.cs" />
+    <Compile Include="DataServices\Maquinas\IMaquinaService.cs" />
+    <Compile Include="DataServices\Maquinas\MaquinaService.cs" />
+    <Compile Include="DataServices\ModulosAquisicao\IModuloAquisicaoService.cs" />
+    <Compile Include="DataServices\ModulosAquisicao\ModuloAquisicaoService.cs" />
+    <Compile Include="DataServices\Roles\IRolesService.cs" />
+    <Compile Include="DataServices\Roles\RolesService.cs" />
+    <Compile Include="DataServices\Sensores\ISensoresService.cs" />
+    <Compile Include="DataServices\Sensores\SensoresService.cs" />
+    <Compile Include="DataServices\TipoPorta\ITiposPortaService.cs" />
+    <Compile Include="DataServices\TipoPorta\TiposPortaService.cs" />
+    <Compile Include="DataServices\Users\IUsersService.cs" />
+    <Compile Include="DataServices\Users\UsersService.cs" />
+    <Compile Include="DataServices\ValoresSensor\IValoresSensorService.cs" />
+    <Compile Include="DataServices\ValoresSensor\ValoresSensorService.cs" />
+    <Compile Include="Pages\IPageWithParameters.cs" />
+    <Compile Include="Pages\CustomNavigationPage.xaml.cs">
+      <DependentUpon>CustomNavigationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ListaFabricasPage.xaml.cs">
+      <DependentUpon>ListaFabricasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MenuPage.xaml.cs">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DataAnalysePage.xaml.cs">
+      <DependentUpon>DataAnalysePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FabricaPage.xaml.cs">
+      <DependentUpon>FabricaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ListaUsersPage.xaml.cs">
+      <DependentUpon>ListaUsersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ListaSensoresPage.xaml.cs">
+      <DependentUpon>ListaSensoresPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ListaModulosAquisicaoPage.xaml.cs">
+      <DependentUpon>ListaModulosAquisicaoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ListaMaquinasPage.xaml.cs">
+      <DependentUpon>ListaMaquinasPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserPage.xaml.cs">
+      <DependentUpon>UserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SensorPage.xaml.cs">
+      <DependentUpon>SensorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ModuloAquisicaoPage.xaml.cs">
+      <DependentUpon>ModuloAquisicaoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MaquinaPage.xaml.cs">
+      <DependentUpon>MaquinaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalSettings.cs" />
+    <Compile Include="ViewModels\MaquinaViewModel.cs" />
+    <Compile Include="Services\Navigation\iOSNavigationService.cs" />
+    <Compile Include="Pages\iOSMainPage.xaml.cs">
+      <DependentUpon>iOSMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\SignalR\SignalRService.cs" />
+    <Compile Include="Services\SignalR\ISIgnalRService.cs" />
+    <Compile Include="Controls\DateTimePicker.cs" />
+    <Compile Include="Models\SmallValoresSensores.cs" />
+    <Compile Include="Models\ValoresBetweenDates.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Helpers\IWifiConnect.cs" />
+    <Compile Include="Models\ConnectionSignalR.cs" />
+    <Compile Include="Models\Room.cs" />
+    <Compile Include="DataServices\Connections\ConnectionService.cs" />
+    <Compile Include="DataServices\Connections\IConnectionService.cs" />
+    <Compile Include="DataServices\Messages\MessagesService.cs" />
+    <Compile Include="DataServices\Messages\IMessagesService.cs" />
+    <Compile Include="DataServices\Rooms\RoomsService.cs" />
+    <Compile Include="DataServices\Rooms\IRoomsService.cs" />
+    <Compile Include="Models\User\UserChat.cs" />
+    <Compile Include="Validations\ActionValidationRule.cs" />
+    <Compile Include="Validations\EmailRule.cs" />
+    <Compile Include="Validations\RepeatPasswordRule.cs" />
+    <Compile Include="Effects\LineColorEffect.cs" />
+    <Compile Include="Converters\ListIsEmptyShowConverter.cs" />
+    <Compile Include="Converters\ListIsEmptyHideConverter.cs" />
+    <Compile Include="Converters\EditOrAddExpandeConverter.cs" />
+    <Compile Include="Validations\IsBetweenValueOfByteRule.cs" />
+    <Compile Include="Validations\IsBetweenValueOfVarChar250Rule.cs" />
+    <Compile Include="Validations\IsValueOfTelefone9Rule.cs" />
+    <Compile Include="Converters\EditOrAddExpandeTwoConverter.cs" />
+    <Compile Include="Validations\IsFormatValueOfSensorMaxMinRule.cs" />
+    <Compile Include="Validations\IsNotNullOrEmptyDoubleRule.cs" />
+    <Compile Include="Validations\IsNotNullOrEmptyPositiveIntRule.cs" />
+    <Compile Include="Validations\IsNotNullOrEmptyPositiveLongRule.cs" />
+    <Compile Include="Converters\ChatColorConverter.cs" />
+    <Compile Include="Converters\ChatToRightConverter.cs" />
+    <Compile Include="Converters\ChartMaxMinConverter.cs" />
+    <Compile Include="Converters\ChartIsContagemConverter.cs" />
+    <Compile Include="Converters\ChartIsCorrenteConverter.cs" />
+    <Compile Include="Models\User\ValoresSensoresContagem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Animations\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Converters\" />
+    <Folder Include="DataServices\" />
+    <Folder Include="Effects\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Pages\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Services\" />
+    <Folder Include="Triggers\" />
+    <Folder Include="Validations\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
+    <Folder Include="ViewModels\Base\" />
+    <Folder Include="Services\Dialog\" />
+    <Folder Include="Services\Navigation\" />
+    <Folder Include="Models\User\" />
+    <Folder Include="Models\Enums\" />
+    <Folder Include="Behaviors\Base\" />
+    <Folder Include="Animations\Base\" />
+    <Folder Include="DataServices\Accounts\" />
+    <Folder Include="DataServices\Auth\" />
+    <Folder Include="DataServices\Base\" />
+    <Folder Include="DataServices\Fabricas\" />
+    <Folder Include="DataServices\Grandezas\" />
+    <Folder Include="DataServices\Maquinas\" />
+    <Folder Include="DataServices\ModulosAquisicao\" />
+    <Folder Include="DataServices\Roles\" />
+    <Folder Include="DataServices\Sensores\" />
+    <Folder Include="DataServices\TipoPorta\" />
+    <Folder Include="DataServices\Users\" />
+    <Folder Include="DataServices\ValoresSensor\" />
+    <Folder Include="Services\SignalR\" />
+    <Folder Include="Services\LocalNotificationCenter\" />
+    <Folder Include="DataServices\Connections\" />
+    <Folder Include="DataServices\Rooms\" />
+    <Folder Include="DataServices\Messages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Helpers\TranslateExtension.txt" />
+    <None Include="project.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+</Project>

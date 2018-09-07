@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+     <data name="AUTENTICAR" xml:space="preserve">
+        <value>AUTENTICAR</value>
+    </data>
+      <data name="Email/Nome Utilizador" xml:space="preserve">
+        <value>Email/Nome Utilizador :</value>
+    </data>
+    <data name="GRUPOS" xml:space="preserve">
+        <value>GRUPOS :</value>
+    </data>
+     <data name="UTILIZADORES" xml:space="preserve">
+        <value>UTILIZADORES</value>
+    </data>
+    <data name="MsgToSend" xml:space="preserve">
+        <value>Mensagem </value>
+    </data>
+    <data name="Chat" xml:space="preserve">
+        <value>Mensagens </value>
+    </data>
+     <data name="MsgToUser" xml:space="preserve">
+        <value>Enviar para o utilizador :</value>
+    </data>
+     <data name="MsgToSendGroup" xml:space="preserve">
+        <value>Enviar para o grupo :</value>
+    </data>
+    <data name="Media" xml:space="preserve">
+        <value>Média :</value>
+    </data>
+     <data name="Maximo" xml:space="preserve">
+        <value>Maximo :</value>
+    </data>
+     <data name="Minimo" xml:space="preserve">
+        <value>Minimo :</value>
+    </data>
+    <data name="Sairsessao" xml:space="preserve">
+        <value>Sair Sessão</value>
+    </data>
+     <data name="Nome" xml:space="preserve">
+        <value>Nome :</value>
+    </data>
+    <data name="NumeroFuncionario" xml:space="preserve">
+        <value>Numero Funcionario:</value>
+    </data>
+    <data name="DadosConta" xml:space="preserve">
+        <value>Dados da Conta:</value>
+    </data>
+     <data name="DadosUtilizador" xml:space="preserve">
+        <value>Dados do Utilizador:</value>
+    </data>
+    <data name="TipoFuncionario" xml:space="preserve">
+        <value>Tipo Funcionario:</value>
+    </data>
+      <data name="Username" xml:space="preserve">
+        <value>Nome Utilizador:</value>
+    </data>
+    <data name="AlterarPassword" xml:space="preserve">
+        <value>Alterar password:</value>
+    </data>
+     <data name="Confirmarpassword" xml:space="preserve">
+        <value>Confirmar password:</value>
+    </data>
+    <data name="passwordantiga" xml:space="preserve">
+        <value>Antiga password:</value>
+    </data>
+     <data name="bloquearutilizador" xml:space="preserve">
+        <value>Bloquear utilizador ?</value>
+    </data>
+      <data name="Guardarutilizador" xml:space="preserve">
+        <value>Guardar utilizador</value>
+    </data>
+      <data name="CodigoSensor" xml:space="preserve">
+        <value>Codigo Sensor</value>
+    </data>
+     <data name="IdModulo" xml:space="preserve">
+        <value>Id Modulo Aquisição</value>
+    </data>
+      <data name="SensorNome" xml:space="preserve">
+        <value>Sensor Nome</value>
+    </data>
+    <data name="ValorMax" xml:space="preserve">
+        <value>ValorMax</value>
+    </data>
+     <data name="Observacoes" xml:space="preserve">
+        <value>Observações</value>
+    </data>
+     <data name="CreatedAt" xml:space="preserve">
+        <value>Criado a:</value>
+    </data>
+     <data name="Tempo" xml:space="preserve">
+        <value>Tempo :</value>
+    </data>
+    <data name="Fator" xml:space="preserve">
+        <value>Fator :</value>
+    </data>
+     <data name="numPorta" xml:space="preserve">
+        <value>Num Porta :</value>
+    </data>
+     <data name="IdTipoPorta" xml:space="preserve">
+        <value>Id tipo porta:</value>
+    </data>
+       <data name="Code" xml:space="preserve">
+        <value>Codigo :</value>
+    </data>
+       <data name="IdGrandeza" xml:space="preserve">
+        <value>Id Grandeza :</value>
+    </data>
+     <data name="ISENABLE" xml:space="preserve">
+        <value>Activo(a)</value>
+    </data>
+     <data name="GuardarSensor" xml:space="preserve">
+        <value>Guardar Sensor</value>
+    </data>
+     <data name="ModulosAquisicao" xml:space="preserve">
+        <value>Modulo Aquisição</value>
+    </data>
+     <data name="CodigoModulo" xml:space="preserve">
+        <value>Codigo Modulo</value>
+    </data>
+     <data name="NomeModulo" xml:space="preserve">
+        <value>Nome Modulo</value>
+    </data>
+      <data name="MaquinaModulo" xml:space="preserve">
+        <value>Maquina do modulo</value>
+    </data>
+    <data name="GuardarModulo" xml:space="preserve">
+        <value>Guardar Modulo</value>
+    </data>
+     <data name="Remove" xml:space="preserve">
+        <value>Remover</value>
+    </data>
+     <data name="Adicionar" xml:space="preserve">
+        <value>Adicionar</value>
+    </data>
+     <data name="SelectUser" xml:space="preserve">
+        <value>Selecionar Utilizador</value>
+    </data>
+     <data name="Localizacao" xml:space="preserve">
+        <value>Localização</value>
+    </data>
+     <data name="Telefone" xml:space="preserve">
+        <value>Telefone</value>
+    </data>
+     <data name="CodigoGateway" xml:space="preserve">
+        <value>Codigo Gateway</value>
+    </data>
+     <data name="Savefabrica" xml:space="preserve">
+        <value>Guardar Fabrica</value>
+    </data>
+     <data name="ListaMaquinasAssociadas" xml:space="preserve">
+        <value>Lista de Maquinas Associadas</value>
+    </data>
+    <data name="ListaUtilizadoresFabrica" xml:space="preserve">
+        <value>Lista utilizadores fabrica</value>
+    </data>
+      <data name="ListaUtilizadoresMaquina" xml:space="preserve">
+        <value>Lista utilizadores da maquina</value>
+    </data>
+    <data name="Numero" xml:space="preserve">
+        <value>Numero</value>
+    </data>
+    <data name="Selecioneutilizadorfabrica" xml:space="preserve">
+        <value>Selecione utilizador para a fabrica</value>
+    </data>
+     <data name="CodigoGateway" xml:space="preserve">
+        <value>Codigo Gateway</value>
+    </data>
+    <data name="HOME" xml:space="preserve">
+        <value>Pagina Principal</value>
+    </data>
+     <data name="ANALISEDEDADOS" xml:space="preserve">
+        <value>Pagina Principal</value>
+    </data>
+    <data name="FABRICA" xml:space="preserve">
+        <value>FABRICA</value>
+    </data>
+    <data name="MAQUINA" xml:space="preserve">
+        <value>MAQUINA</value>
+    </data>
+     <data name="MODULOAQUISICAO" xml:space="preserve">
+        <value>MODULO DE AQUISIÇÃO</value>
+    </data>
+     <data name="SENSOR" xml:space="preserve">
+        <value>SENSOR</value>
+    </data>
+     <data name="USER" xml:space="preserve">
+        <value>UTILIZADOR</value>
+    </data>
+     <data name="LISTAFABRICAS" xml:space="preserve">
+        <value>LISTA FABRICAS</value>
+    </data>
+     <data name="LISTADEMAQUINAS" xml:space="preserve">
+        <value>LISTA MAQUINAS</value>
+    </data>
+    <data name="LISTADEMODULOS" xml:space="preserve">
+        <value>LISTA DE MODULOS DE AQUISIÇÃO</value>
+    </data>
+    <data name="LISTADESENSORES" xml:space="preserve">
+        <value>LISTA DE SENSORES</value>
+    </data>
+    <data name="LISTADEUTILIZADORES" xml:space="preserve">
+        <value>LISTA DE UTILIZADORES</value>
+    </data>
+</root>

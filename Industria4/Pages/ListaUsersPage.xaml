@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Industria4.Pages.ListaUsersPage"
+             Title="{i18n:Translate LISTADEUTILIZADORES }"
+             xmlns:i18n="clr-namespace:Industria4.Helpers"
+             xmlns:animations="clr-namespace:Industria4.Animations;assembly=Industria4"
+             xmlns:converters="clr-namespace:Industria4.Converters;assembly=Industria4"
+             xmlns:triggers="clr-namespace:Industria4.Triggers;assembly=Industria4"
+             xmlns:behaviors="clr-namespace:Industria4.Behaviors;assembly=Industria4"
+             xmlns:templates="clr-namespace:Industria4.Views;assembly=Industria4"   >
+
+ 
+  <ContentPage.Content>  
+   <StackLayout >
+        <ListView  SeparatorVisibility="None" ItemsSource="{Binding Users}" behaviors:ItemTappedCommandListView.ItemTappedCommand="{Binding GetUserDetailsCommand}"  HasUnevenRows="True" Margin="5">
+                <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell >
+                         <templates:ItemUserTemplateView/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+ 
+</ContentPage>
+

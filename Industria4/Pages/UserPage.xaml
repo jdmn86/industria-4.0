@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Industria4.Pages.UserPage"
+             Title="{i18n:Translate USER }"
+             xmlns:i18n="clr-namespace:Industria4.Helpers"
+             xmlns:animations="clr-namespace:Industria4.Animations;assembly=Industria4"
+             xmlns:converters="clr-namespace:Industria4.Converters;assembly=Industria4"
+             xmlns:triggers="clr-namespace:Industria4.Triggers;assembly=Industria4"
+             xmlns:behaviors="clr-namespace:Industria4.Behaviors;assembly=Industria4"
+             xmlns:templates="clr-namespace:Industria4.Views.Templates;assembly=Industria4">
+   <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationErrorConverter x:Key="FirstValidationErrorConverter" />
+            
+              <Style x:Key="HeaderItemHeaderLabelStyle"
+               TargetType="{x:Type Label}">
+            <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource BigSize}" /> 
+            <Setter Property="FontAttributes"
+                    Value="Bold" /> 
+        </Style>
+        
+        <Style x:Key="HeaderItemLabelStyle"
+               TargetType="{x:Type Label}">
+            <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource WhiteColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource BigSize}" />  
+        </Style>
+            
+           <Style x:Key="ItemHeaderLabelStyle"
+                TargetType="{x:Type Label}">
+             <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="HorizontalOptions"
+                    Value="Start" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource BlueColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource LargeSize}" /> 
+            <Setter Property="FontAttributes"
+                    Value="Bold" />         
+        </Style>   
+
+              <Style x:Key="ItemLabelStyle" 
+               TargetType="{x:Type Label}">
+              <Setter Property="VerticalTextAlignment"
+                    Value="Center" />   
+            <Setter Property="HorizontalOptions"
+                    Value="Center" />   
+            <Setter Property="TextColor"
+                    Value="{StaticResource BlackColor}" />
+            <Setter Property="FontSize"
+                    Value="{StaticResource LargeSize}" />       
+        </Style>
+
+            <Style x:Key="EntryStyle"
+                   TargetType="{x:Type Entry}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource MontserratRegular}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="PlaceholderColor"
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource LargeSize}" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="BackgroundColor" 
+                        Value="Transparent" />
+                <Setter Property="Opacity"
+                        Value="0.6" />
+            </Style>
+      
+            </ResourceDictionary>
+</ContentPage.Resources>
+
+
+ <ContentPage.Content>
+    <Grid Margin="2"  HorizontalOptions="FillAndExpand" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="65*"/>
+                <RowDefinition Height="20*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="50*" />
+            </Grid.ColumnDefinitions>
+
+        <StackLayout  Grid.Row="0" Grid.Column="0">
+            <Label Text="{i18n:Translate DadosUtilizador}" FontSize="30" Margin="10" HorizontalTextAlignment="Center"/> 
+        </StackLayout>
+                
+        <StackLayout  Grid.Row="0" Grid.Column="1">
+            <Label Text="{i18n:Translate DadosConta}" FontSize="30" Margin="10" HorizontalTextAlignment="Center"/> 
+        </StackLayout>
+            
+        <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Vertical" HorizontalOptions="Center"  >
+            
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{i18n:Translate Nome}" HorizontalOptions="Center" VerticalTextAlignment="End"/>
+                <Entry  Text="{Binding Nome.Value}" Placeholder="{i18n:Translate Nome}" >
+                   <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                    EventName="TextChanged"
+                                    Command="{Binding ValidateNomeCommand}" />
+                            </Entry.Behaviors>
+                            <Entry.Triggers>
+                                <DataTrigger TargetType="Entry"
+                                    Binding="{Binding Nome.IsValid}"
+                                    Value="False">
+                                    <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                </DataTrigger>
+                            </Entry.Triggers>
+                        </Entry>
+                     
+            </StackLayout>
+                <Label Text="{Binding Nome.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                       Style="{StaticResource ValidationErrorLabelStyle}" />
+                
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{i18n:Translate NumeroFuncionario}" HorizontalOptions="Center" VerticalTextAlignment="End"/>
+                <Entry Text="{Binding NumeroFuncionario.Value}" Placeholder="{i18n:Translate NumeroFuncionario}">
+                       <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding ValidateNumeroFuncionarioCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                        Binding="{Binding NumeroFuncionario.IsValid}"
+                                        Value="False">
+                                        <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                         
+            </StackLayout>
+            <Label Text="{Binding NumeroFuncionario.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           Style="{StaticResource ValidationErrorLabelStyle}" />
+                
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Email:" HorizontalOptions="Center" VerticalTextAlignment="End"/>
+                <Entry Text="{Binding Email}" Placeholder="Email">
+                       <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                        EventName="TextChanged"
+                                        Command="{Binding ValidateEmailCommand}" />
+                                </Entry.Behaviors>
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                        Binding="{Binding Email.IsValid}"
+                                        Value="False">
+                                        <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+                         
+            </StackLayout>
+             <Label Text="{Binding Email.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                           Style="{StaticResource ValidationErrorLabelStyle}" />
+
+                
+        </StackLayout>
+            
+    <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalOptions="Center" >       
+
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{i18n:Translate TipoFuncionario}" HorizontalOptions="Center" VerticalTextAlignment="End"/>                    
+            <Picker  Title="{i18n:Translate TipoFuncionario}"
+                VerticalOptions="CenterAndExpand"
+                Margin="10, 0"
+                SelectedItem="{Binding SelectedRole}"
+                ItemsSource="{Binding Roles}"
+                ItemDisplayBinding="{Binding Name}"/>
+        </StackLayout>
+
+         <StackLayout Orientation="Horizontal">
+            <Label Text="{i18n:Translate Username}" HorizontalOptions="Center" VerticalTextAlignment="End"/>
+            <Entry Text="{Binding UserName}" Placeholder="{i18n:Translate Username}">
+                 <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior
+                            EventName="TextChanged"
+                            Command="{Binding ValidateUserNameCommand}" />
+                    </Entry.Behaviors>
+                    <Entry.Triggers>
+                        <DataTrigger TargetType="Entry"
+                            Binding="{Binding UserName.IsValid}"
+                            Value="False">
+                            <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>    
+        </StackLayout>
+        <Label Text="{Binding UserName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+            Style="{StaticResource ValidationErrorLabelStyle}" />
+
+
+         <Button IsVisible="{Binding ButtonPassword}" Command="{Binding MudarPasswordCommand}" 
+            Text="{i18n:Translate AlterarPassword}"
+            TextColor="White"
+            FontSize="20"
+            BackgroundColor="Blue" 
+            WidthRequest="150"
+            HorizontalOptions="Center"/>
+                
+       <StackLayout IsVisible="{ Binding IsSaving}" >
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Password : " HorizontalOptions="Center" VerticalTextAlignment="End"/>
+                <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="true"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{i18n:Translate Confirmarpassword}" HorizontalOptions="Center" VerticalTextAlignment="End"/>
+                <Entry Text="{Binding ConfirmPassword}" Placeholder="{i18n:Translate Confirmarpassword}" IsPassword="true"/>
+            </StackLayout>
+                    
+      </StackLayout>
+
+      <StackLayout IsVisible="{ Binding IsMudarPassword}" >
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Password : " HorizontalOptions="Center" VerticalTextAlignment="End"/>
+                <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="true"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{i18n:Translate Confirmarpassword}" HorizontalOptions="Center" VerticalTextAlignment="End"/>
+                <Entry Text="{Binding ConfirmPassword}" Placeholder="{i18n:Translate Confirmarpassword}" IsPassword="true"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{i18n:Translate passwordantiga}" HorizontalOptions="Center" VerticalTextAlignment="End"/>
+                <Entry Text="{Binding OldPassword}" Placeholder="{i18n:Translate passwordantiga}" IsPassword="true"/>
+            </StackLayout>
+       </StackLayout>
+                
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{i18n:Translate bloquearutilizador}" FontSize="20" Margin="20" HorizontalTextAlignment="Center"/> 
+            <Switch IsToggled="{Binding user.AspNetUser.IsEnable}" Scale="0.6"/>
+        </StackLayout>
+
+   </StackLayout>
+
+        <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+            <Button Command="{Binding RegisterCommand}" 
+                    CommandParameter="{Binding .}"
+                    Text="{i18n:Translate Guardarutilizador}"
+                    TextColor="White"
+                    FontSize="30"
+                    BackgroundColor="Blue" 
+                    HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+   </Grid>
+   </ContentPage.Content>
+</ContentPage>
